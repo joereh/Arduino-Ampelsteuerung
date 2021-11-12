@@ -2,7 +2,7 @@
 RCSwitch receiver = RCSwitch(); //Definition
 
 const int led_pin = 5; // LED ist an Pin D5
-// Add comment
+
 void setup() {
   pinMode(led_pin, OUTPUT); // D5 ist ein OUTPUT
   receiver.enableReceive(0); // Empfänger hängt an D2, was der Interrupt Pin 0 ist, nicht verwirren lassen
