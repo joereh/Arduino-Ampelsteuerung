@@ -1,14 +1,10 @@
-#include <RCSwitch.h> //Library
-RCSwitch sender = RCSwitch(); //Definition
+#include <RCSwitch.h>
 
-const int code = 2345; //Der Code den wir übermitteln wollen
-const int senderpin = 10; //Der Pin an dem wir den DataPin des Transmitters angeschlossen haben
-
+RCSwitch mySwitch = RCSwitch();
 void setup() {
-  sender.enableTransmit(senderpin); //Wir sagen dem Arduino wo wir senden, hier unser DataPin
+  mySwitch.enableTransmit(10);  // Der Sender wird an Pin 10 angeschlossen
 }
-
 void loop() {
-  sender.send(code, 16); //Wir senden den Code mit 16 Bit
-  delay(1000); //Arduino wartet nach dem Senden 1000ms
-}
+  mySwitch.send(1234, 24); // Der 433mhz Sender versendet die Dezimalzahl „1234“
+  delay(1000);  // Eine Sekunde Pause, danach startet der Sketch von vorne
+}  
