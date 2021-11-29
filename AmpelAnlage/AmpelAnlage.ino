@@ -1,22 +1,22 @@
 
+//Ampelanlage
 #include <RCSwitch.h>
 RCSwitch mySwitch = RCSwitch();
 int buttonState;
 
-
 // Ampel Belegung der Ausgaenge
 //Ampelspur 1
-const byte RotA1 = 3;    
+const byte RotA1 = 3;
 const byte GelbA1 = 4;
 const byte GruenA1 = 5;
-//Fussgängerspur 1 
-const byte RotF1 = 6;    
+//Fussgängerspur 1
+const byte RotF1 = 6;
 const byte GruenF1 = 7;
 ////Fussgängerspur 2
-const byte RotF2 = 8;    
+const byte RotF2 = 8;
 const byte GruenF2 = 9;
 //Ampelspur 2
-const byte RotA2 = 10;    
+const byte RotA2 = 10;
 const byte GelbA2 = 11;
 const byte GruenA2 = 12;
 
@@ -42,12 +42,12 @@ void setup() {
   pinMode(GruenF2, OUTPUT);
   pinMode(RotA2, OUTPUT);
   pinMode(GelbA2, OUTPUT);
-  pinMode(GruenA2, OUTPUT);  
+  pinMode(GruenA2, OUTPUT);
   // Empfänger ist an Interrupt-Pin "0" - Das ist am UNO der Pin2
-  mySwitch.enableReceive(0);  
+  mySwitch.enableReceive(0);
   //Debug
   Serial.begin(9600);
-  Serial.println("Ampelsteuerung setup"); 
+  Serial.println("Ampelsteuerung setup");
  }
 
 void loop() {
@@ -57,7 +57,7 @@ if (mySwitch.available()) // Wenn ein Code Empfangen wird...
     buttonState = mySwitch.getReceivedValue();
     mySwitch.resetAvailable(); // Hier wird der Empfänger "resettet"
   }
-  
+
   // Ampelschaltung
   if ((millis() - ampelMillis >= ampelIntervall)) {
     switch (zustand) {
@@ -79,7 +79,7 @@ if (mySwitch.available()) // Wenn ein Code Empfangen wird...
         digitalWrite(GelbA2, LOW);
         digitalWrite(GruenA2, HIGH);
         digitalWrite(RotF2, HIGH);
-        digitalWrite(GruenF2, LOW);        
+        digitalWrite(GruenF2, LOW);
         zustand = ROTGELB;
         ampelMillis = millis();
         if(buttonState == 3001)
@@ -87,7 +87,7 @@ if (mySwitch.available()) // Wenn ein Code Empfangen wird...
              digitalWrite(RotF1, LOW);
              digitalWrite(GruenF1, HIGH);
              digitalWrite(RotF2, HIGH);
-             digitalWrite(GruenF2, LOW); 
+             digitalWrite(GruenF2, LOW);
              ampelIntervall = FUSSGAENGERPHASE;
              buttonState=0;
            }
@@ -107,9 +107,9 @@ if (mySwitch.available()) // Wenn ein Code Empfangen wird...
         digitalWrite(GelbA2, HIGH);
         digitalWrite(GruenA2, LOW);
         digitalWrite(RotF2, HIGH);
-        digitalWrite(GruenF2, LOW); 
+        digitalWrite(GruenF2, LOW);
 
-        
+
         zustand = GRUEN;
         ampelMillis = millis();
         ampelIntervall = ZEITGELBPHASE;
@@ -128,9 +128,9 @@ if (mySwitch.available()) // Wenn ein Code Empfangen wird...
         if(buttonState == 4001)
            {
              digitalWrite(RotF2, LOW);
-             digitalWrite(GruenF2, HIGH); 
+             digitalWrite(GruenF2, HIGH);
              digitalWrite(RotF1, HIGH);
-             digitalWrite(GruenF1, LOW);      
+             digitalWrite(GruenF1, LOW);
              ampelIntervall = FUSSGAENGERPHASE;
              buttonState=0;
            }
@@ -145,7 +145,7 @@ if (mySwitch.available()) // Wenn ein Code Empfangen wird...
         // Spur2 ROT-Gelb
         digitalWrite(RotA2, HIGH);
         digitalWrite(GelbA2, HIGH);
-        digitalWrite(GruenA2, LOW); 
+        digitalWrite(GruenA2, LOW);
         zustand = ASTOP;
         ampelMillis = millis();
         ampelIntervall = ZEITGELBPHASE;
@@ -163,9 +163,9 @@ if (mySwitch.available()) // Wenn ein Code Empfangen wird...
            }
          else {
           zustand = ROT;
-          }  
-        break;         
-        
+          }
+        break;
+
     } //case
-  }//if 
+  }//if
 }//loop
