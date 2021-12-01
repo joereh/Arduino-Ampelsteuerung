@@ -160,6 +160,8 @@ if (mySwitch.available()) // Wenn ein Code Empfangen wird...
            digitalWrite(GelbA2, LOW);
            digitalWrite(RotF1, LOW);
            digitalWrite(RotF2, LOW);
+           digitalWrite(GruenF1, LOW);
+           digitalWrite(GruenF2, LOW);
            }
          else {
           zustand = ROT;
