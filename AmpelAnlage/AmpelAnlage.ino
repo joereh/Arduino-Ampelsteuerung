@@ -108,8 +108,6 @@ if (mySwitch.available()) // Wenn ein Code Empfangen wird...
         digitalWrite(GruenA2, LOW);
         digitalWrite(RotF2, HIGH);
         digitalWrite(GruenF2, LOW);
-
-
         zustand = GRUEN;
         ampelMillis = millis();
         ampelIntervall = ZEITGELBPHASE;
